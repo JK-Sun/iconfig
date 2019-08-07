@@ -17,6 +17,7 @@ vim 和 tmux 的简单配置。
 git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
 
+git clone https://github.com/JK-Sun/iconfig.git
 cd iconfig
 cp my_configs.vim ~/.vim_runtime
 ```
