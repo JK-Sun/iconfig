@@ -2,11 +2,11 @@
 
 vim 和 tmux 的简单配置。
 
-# 使用
+# VIM
 
-## 方案一
+## 配置一
 
-**克隆脚本**
+克隆
 
 ```shell
 git clone https://github.com/JK-Sun/iconfig.git
@@ -14,20 +14,19 @@ git clone https://github.com/JK-Sun/iconfig.git
 cd iconfig
 cp -r vim ~/.vim
 cp vimrc ~/.vimrc
-cp tmux.conf ~/.tmux.conf
 ```
 
-**依赖**
+依赖
 
 ```shell
-#ubuntu
+# ubuntu
 sudo apt-get install ctags
 
-#mac
+# mac
 brew install ctags
 ```
 
-# 方案二
+## 配置二
 
 https://github.com/amix/vimrc
 
@@ -37,4 +36,23 @@ sh ~/.vim_runtime/install_awesome_vimrc.sh
 
 cd iconfig
 cp my_configs.vim ~/.vim_runtime
+```
+
+# TMUX
+
+安装
+
+```shell
+# ubuntu
+sudo apt-get install tmux
+
+# mac
+brew install tmux
+```
+
+配置
+
+```shell
+git clone https://github.com/JK-Sun/iconfig.git
+cp tmux.conf ~/.tmux.conf
 ```
