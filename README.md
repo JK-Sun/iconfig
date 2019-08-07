@@ -72,7 +72,7 @@ cp tmux.conf ~/.tmux.conf
 
 - `:vs`  纵向分屏
 - `:sp`  横向分屏
-- `Ctrl+h/j/k/l`  切换屏幕
+- `Ctrl+h/j/k/l`  切换窗口
 - `wm`  打开树型菜单
 - `mm`  打开最近访问文件菜单
 
