@@ -11,7 +11,7 @@ vim 和 tmux 的简单配置。
 
 ## 配置一（推荐）
 
-https://github.com/amix/vimrc
+来源：https://github.com/amix/vimrc
 
 ```shell
 git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
