@@ -75,6 +75,7 @@ cp tmux.conf ~/.tmux.conf
 - `Ctrl+h/j/k/l`  切换窗口
 - `wm`  打开树型菜单
 - `mm`  打开最近访问文件菜单
+- `zR` 展开全部折叠
 
 # TMUX快捷键
 
