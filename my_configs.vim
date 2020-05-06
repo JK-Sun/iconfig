@@ -28,8 +28,8 @@ set smarttab
 set et
 set ambiwidth=double
 
-" 关闭ale保存文件时语法检查
-let g:ale_lint_on_save = 0
+" 关闭ale语法检查
+let g:ale_enabled = 0
 
 call plug#begin('~/.vim_runtime/my_plugins')
 
