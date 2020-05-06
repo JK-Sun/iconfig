@@ -26,6 +26,18 @@ cd iconfig
 cp my_configs.vim ~/.vim_runtime
 ```
 
+安装vim-plug
+
+```
+curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+进入vim中安装插件
+
+```
+:PlugInstall
+```
+
 ## 配置二
 
 克隆
@@ -76,6 +88,8 @@ cp tmux.conf ~/.tmux.conf
 - `wm`  打开树型菜单
 - `mm`  打开最近访问文件菜单
 - `zR` 展开全部折叠
+- `,f` 查找文件
+- `,g` 全文查找
 
 # TMUX快捷键
 

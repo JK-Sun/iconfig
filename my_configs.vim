@@ -11,7 +11,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " 已打开文件列表
-nmap mm :MRU<cr>
+nmap mm :BufExplorer<cr>
 
 " 树型目录
 nmap wm :NERDTree<cr>
@@ -27,3 +27,20 @@ set sw=2
 set smarttab
 set et
 set ambiwidth=double
+
+" 关闭ale保存文件时语法检查
+let g:ale_lint_on_save = 0
+
+call plug#begin('~/.vim_runtime/my_plugins')
+
+" fzf用于文件搜索、全文搜索
+Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
+
+" 搜索文件
+map <leader>f :Files<cr>
+
+" 全文搜索
+map <leader>g :Ag<cr>
