@@ -21,15 +21,19 @@ vim 和 tmux 的简单配置。
 git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
 
-git clone https://github.com/JK-Sun/iconfig.git
-cd iconfig
-cp my_configs.vim ~/.vim_runtime
+curl -fLo ~/.vim_runtime/my_configs.vim https://raw.githubusercontent.com/JK-Sun/iconfig/master/my_configs.vim
 ```
 
 安装vim-plug
 
-```
+```shell
 curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+如果无法访问`https://raw.githubusercontent.com`， 配置hosts
+
+```
+199.232.28.133  raw.githubusercontent.com
 ```
 
 进入vim中安装插件
@@ -76,8 +80,7 @@ brew install tmux
 配置
 
 ```shell
-git clone https://github.com/JK-Sun/iconfig.git
-cp tmux.conf ~/.tmux.conf
+curl -fLo ~/.tmux.conf https://raw.githubusercontent.com/JK-Sun/iconfig/master/tmux.conf
 ```
 
 # VIM快捷键
