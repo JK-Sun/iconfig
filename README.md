@@ -44,13 +44,13 @@ curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs https://raw.githubuserc
 
 安装依赖
 
-```
+```shell
 # 用于fzf插件rg全文搜索
-# https://github.com/BurntSushi/ripgrep#installation
+# https://github.com/BurntSushi/ripgrep
 brew install ripgrep
 
 # 用于fzf插件查找文件，代替find命令，提高效率
-# https://github.com/chinanf-boy/fd-zh#macos
+# https://github.com/chinanf-boy/fd-zh
 brew install fd
 
 # .bachrc中添加
