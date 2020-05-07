@@ -43,4 +43,7 @@ call plug#end()
 map <leader>f :Files<cr>
 
 " 全文搜索
-map <leader>g :Ag<cr>
+map <leader>g :Rg<cr>
+
+" 去除结尾空格
+autocmd BufWritePre * :%s/\s\+$//e

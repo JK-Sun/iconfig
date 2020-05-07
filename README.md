@@ -42,6 +42,21 @@ curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs https://raw.githubuserc
 :PlugInstall
 ```
 
+安装依赖
+
+```
+# 用于fzf插件rg全文搜索
+# https://github.com/BurntSushi/ripgrep#installation
+brew install ripgrep
+
+# 用于fzf插件查找文件，代替find命令，提高效率
+# https://github.com/chinanf-boy/fd-zh#macos
+brew install fd
+
+# .bachrc中添加
+export FZF_DEFAULT_COMMAND='fd --type file'
+```
+
 ## 配置二
 
 克隆
