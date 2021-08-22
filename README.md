@@ -12,22 +12,22 @@ vim 和 tmux 的简单配置。
 
 操作前请先备份原有文件。
 
-# VIM
+# NVIM
+
+```shell
+brew install neovim
+```
 
 ## 配置一（推荐）
 
 ```shell
-# vim
-curl -fLo ~/.vimrc https://raw.githubusercontent.com/JK-Sun/iconfig/master/init.vim
-
-# nvim
-curl -fLo ~/.config/nvim/init.vim https://raw.githubusercontent.com/JK-Sun/iconfig/master/init.vim
+curl -fLo ~/.config/nvim/init.vim --create-dirs https://raw.githubusercontent.com/JK-Sun/iconfig/master/init.vim
 ```
 
 安装vim-plug
 
 ```shell
-curl -fLo ~/.vim_runtime/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
 如果无法访问`https://raw.githubusercontent.com`， 配置hosts
