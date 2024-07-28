@@ -1,0 +1,606 @@
+USER-SUPPLIED VALUES:
+USER-SUPPLIED VALUES: null
+canary:
+  enabled: false
+canaryInside:
+  backend: gitee-code-go.{{ .Release.Namespace }}.svc.cluster.local
+  enabled: false
+  front: gitee-code-canary-front.{{ .Release.Namespace }}.svc.cluster.local
+  programs:
+  - enterprise_uuid/program_uuid
+  - 企业地址/项目地址
+  rewritePerfix: /api/code-canary
+canaryNew:
+  enabled: false
+  targetNamespace: gitee
+cloc:
+  affinity: {}
+  enabled: false
+  image:
+    pullPolicy: IfNotPresent
+    repository: gitee-prod/code-cloc
+    tag: v0.0.1
+  log:
+    level: 5
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  port: 3001
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+codeGo:
+  host: gitee-code-go
+  port: 3000
+consumer:
+  affinity: {}
+  image:
+    pullPolicy: IfNotPresent
+    repository: gitee-prod/code-consumer
+    tag: v1.6.0
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+databaseApater: mysql2
+databaseEncoding: utf8mb4
+databaseType: pgsql
+dt:
+  affinity: {}
+  config:
+    clonePrefix: http://dt-master.gitee.work:80
+    concurrency: 5
+    nodeName: master
+    primary: true
+  enabled: false
+  image:
+    pullPolicy: IfNotPresent
+    repository: gitee-test/code-dt
+    tag: master-16
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+endpoint:
+  gateway:
+    host: gitee-api-gateway.{{ .Release.Namespace }}.svc.cluster.local
+    port: 8080
+front:
+  affinity: {}
+  config:
+    dnsServer: kube-dns.kube-system.svc.cluster.local
+    gateway: gitee-api-gateway.{{ .Release.Namespace }}.svc.cluster.local:8080
+  image:
+    pullPolicy: IfNotPresent
+    repository: gitee-prod/code-front
+    tag: v8.9.5
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+fullnameOverride: gitee-code
+gateways:
+- gitee-gateway
+gitaly:
+  affinity: {}
+  config:
+    encrypt:
+      enabled: false
+      repositoryPath: /root/code/repositories/encrypt
+      size: 500G
+      storagePath: /root/code/repositories/raw
+    gitHook:
+      branchLimit: 10000
+      commitLimit: 0
+    repositoryPath: /root/code/repositories
+    useCustomVirtualStorage: false
+    virtualStorage:
+    - name: gitee-code-gitaly-0
+      nodes:
+      - address: tcp://15.55.237.253:13001
+        storage: gitee-code-gitaly-0-0
+      - address: tcp://15.65.237.252:13001
+        storage: gitee-code-gitaly-0-1
+      - address: tcp://15.55.237.252:13001
+        storage: gitee-code-gitaly-0-2
+    - name: gitee-code-gitaly-1
+      nodes:
+      - address: tcp://15.55.237.253:13002
+        storage: gitee-code-gitaly-1-0
+      - address: tcp://15.65.237.252:13002
+        storage: gitee-code-gitaly-1-1
+      - address: tcp://15.55.237.252:13002
+        storage: gitee-code-gitaly-1-2
+  image:
+    pullPolicy: IfNotPresent
+    repository: gitee-prod/code-gitaly
+    tag: v14.11.1
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  nodeCount: 3
+  persistence:
+    size: 500Gi
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  port: 9999
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 4
+      memory: 8Gi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+global:
+  imagePullSecrets:
+  - oschub
+  - osc-nexus-hub
+  imageRegistry: docker-hub.gitee.work
+help:
+  affinity: {}
+  config:
+    gitRemote: ""
+    repoPath: ""
+  enabled: true
+  image:
+    pullPolicy: IfNotPresent
+    repository: gitee-prod/code-help
+    tag: v1.0.22
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 2
+      memory: 4Gi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+i18n:
+  lang: zh_cn
+jira:
+  enable: false
+  host: http://192.168.80.36:8080
+  password: qwe123
+  username: admin
+kafka:
+  enabled: true
+  endpoint: gitee-kafka-0.gitee-kafka-headless.{{ .Release.Namespace }}.svc.cluster.local:9092,gitee-kafka-1.gitee-kafka-headless.{{
+    .Release.Namespace }}.svc.cluster.local:9092,gitee-kafka-2.gitee-kafka-headless.{{
+    .Release.Namespace }}.svc.cluster.local:9092
+  sasl:
+    enabled: false
+    password: Gitee@2020
+    username: gitee
+  topic:
+    numPartitions: 3
+    replicationFactor: 3
+learnGitBranching:
+  affinity: {}
+  enabled: true
+  image:
+    pullPolicy: IfNotPresent
+    repository: gitee-prod/learn-git-branching
+    tag: v1.0.0
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+lfs:
+  affinity: {}
+  config:
+    storage:
+      accessKey: admin@2020
+      bucket: gitee-code-lfs
+      endpoint: http://code.gitee.work:57859
+      expires: 1200
+      name: minio
+      region: cn-north-1
+      secretKey: admin@2020
+      useHttps: false
+  enabled: true
+  image:
+    pullPolicy: IfNotPresent
+    repository: gitee-prod/code-lfs
+    tag: v1.1.1
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  port: 8001
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 1
+      memory: 2G
+    requests:
+      cpu: 100m
+      memory: 300Mi
+logrotate:
+  cron: 00 05 * * *
+  rotate: 30
+manager:
+  affinity: {}
+  image:
+    pullPolicy: IfNotPresent
+    repository: gitee-prod/code-manager
+    tag: v1.1.6
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  port: 8088
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+minio:
+  accessKey: admin@2020
+  enable: true
+  host: gitee-minio
+  port: 9000
+  scheme: http
+  secretKey: admin@2020
+mysql:
+  connMaxLifetime: 5
+  database: gitee-code
+  host: gitee-mysql-haproxy
+  lfsDatabase: gitee-code-lfs
+  maxIdleConns: 10
+  maxOpenConns: 100
+  password: admin@2020
+  pool: 40
+  port: 3306
+  praefectDatabase: gitee-code-praefect
+  username: root
+nameOverride: code
+pilot:
+  config:
+    checkIPEnabled: true
+  image:
+    pullPolicy: IfNotPresent
+    repository: gitee-prod/code-pilot
+    tag: v1.8.3
+pilotHttp:
+  affinity: {}
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  port: 8806
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 2
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+pilotSsh:
+  affinity: {}
+  config:
+    idleTimeout: 1200
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  port: 2222
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 2
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+plugin:
+  affinity: {}
+  enabled: true
+  image:
+    repository: gitee-prod/code-plugin
+    tag: gx-v1.0.5
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  resources:
+    limits:
+      cpu: 1
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 500Mi
+postgresql:
+  connMaxLifetime: 5
+  dbname: praefect_production
+  host: gitee-postgres
+  maxIdleConns: 10
+  maxOpenConns: 100
+  password: admin@2020
+  port: 5432
+  sslmode: disable
+  username: postgres
+praefect:
+  affinity: {}
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  port: 9999
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 1
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+prometheus:
+  port: 9236
+qingCloud:
+  accessKey: ""
+  bucket: ""
+  enabled: false
+  endpoint: ""
+  region: ""
+  secretKey: ""
+rails:
+  affinity: {}
+  config:
+    adminToken: f7daa65b2aa96290bb47c4d68d11fe6a
+    ceb:
+      enabled: false
+    cmbchina:
+      bigCommit:
+        defaultExchange: big2
+        queue: big1
+        routingKey: big6
+        syncExchange: big3
+        syncToCodelineExchange: big4
+      codeLine:
+        enable: false
+        mqEbable: false
+        mqHost: 0.0.0.0
+        mqPassword: xxx-xxx-xxx
+        mqPort: 5672
+        mqUser: xxx-xxx-xxx
+        mqVhost: xxx-xxx-xxx
+        postCommitExchange: code-line-post-commit
+        postCommitRoutingKey: code_line_test
+        pushCommitExchange: code-line-push-commit
+        pushCommitRoutingKey: code_line_test
+      commitSync:
+        password: devops-mayun@2019
+        url: http://devops-kanban.paasst.cmbchina.cn/openapi/rest/code-review
+        username: devops-mayun
+      devMateCheckUrl: http://55.12.223.3:8092/brcMng/git/pushPermissionCheck
+      exposeBanjoPort: false
+      exposePraefectPort: false
+      hiddenEnterprise: false
+      kanban:
+        commitStatusExchange: cc_one
+        enable: false
+        mqEnable: false
+        mqHost: code-mq-rabbitmq
+        mqPassword: reggie
+        mqPort: 5672
+        mqUser: reggie
+        mqVhost: /
+        projectStatusExchange: pro_one
+      newKanban:
+        commitStatusExchange: commit-issue
+        enable: false
+        mqEnable: false
+        mqHost: 0.0.0.0
+        mqPassword: xxxxxxx
+        mqPort: 5672
+        mqUser: xxxxxxx
+        mqVhost: xxxxxxx
+      oldLfs: false
+      prBranchKanban:
+        enable: false
+        mqEnable: false
+        mqHost: 55.11.87.184
+        mqPassword: 11e56b5f-b94f-40eb-be8e-3a748f408313
+        mqPort: 5672
+        mqUser: 5c9c187a-3fc8-4724-acd6-69cd0f2d5b50
+        mqVhost: 61306eef-24ff-49f2-9e47-70477a4ec1b6
+        prBranchStateExchange: gitee.pull-request:exchange
+        routingKey: pull-request.sync
+      seed:
+        bugUrl: ""
+        storyUrl: ""
+    defaultCardValidate: false
+    defaultWatermark: false
+    domain: code.dev.gitee.work
+    domainPort: 80
+    dt:
+      clonePrefix: http://127.0.0.1:8989
+      enabled: true
+      nodeName: primary-1
+      primaryNode: true
+    gitHttpCloneProtocol: http
+    gitHttpPort: 80
+    gitSshPort: 30004
+    hashedStorage:
+      enabled: false
+    healthCheckPath: /api/servers/check
+    huaxia:
+      CRHost: http://127.0.0.1
+      IRHost: http://127.0.0.1
+      enabled: false
+    ipipe:
+      enabled: false
+      host: gitee-ipipe-pipeline:6610
+      plat: gitee-back
+      token: "123456789"
+      uid: "123"
+    kafkaMaxMessageBytes: "20971520"
+    lfs:
+      host: gitee-code-lfs
+      singleQuota: 1024
+      totalQuota: 1048576
+    logFormatJsonEnabled: false
+    manager:
+      host: gitee-code-manager:8088
+    ningbo:
+      enabled: false
+    one:
+      host: gitee-one:8910
+    opensourceEnabled: true
+    project:
+      enabled: false
+      host: gitee-project-service:8130
+    protocol: http
+    proxima:
+      coreHost: gitee-proxima-core:1337
+      enabled: false
+      host: http://proxima.example.com
+      token: a:ug9yu2qzh84rl102az3usdex
+    pushMaxMBSize: 200
+    railsMaxThreads: 40
+    railsMinThreads: 8
+    report:
+      enabled: false
+      host: gitee-report-report-web
+      port: 8080
+    resolveConflictEnabled: true
+    reviewerGroup: false
+    scan:
+      apiToken: ca090d98a89757016806f7de8dfax43c
+      clonePassword: 5iveL!fe
+      cloneUserName: root
+      enabled: false
+      filterSettingEnble: false
+      host: gitee-scan-server:8001
+    secret: 7ed145bd315c6cfb
+    srcb:
+      apiUrl: http://127.0.0.1
+      enabled: false
+    useApiV5: false
+    useMultiTenant: false
+    useSingleRedis: false
+    wikiEnabled: false
+  enabled: true
+  image:
+    pullPolicy: IfNotPresent
+    repository: gitee-prod/code-rails
+    tag: v8.9.9.1
+  nodeAffinityPreset:
+    key: kubernetes.io/node-type
+    type: ""
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  port: 3000
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 4
+      memory: 6Gi
+    requests:
+      cpu: 300m
+      memory: 500Mi
+redisSentinel:
+  db: 6
+  hosts: gitee-redis-ha-announce-0.{{ .Release.Namespace }}.svc.cluster.local,gitee-redis-ha-announce-1.{{
+    .Release.Namespace }}.svc.cluster.local,gitee-redis-ha-announce-2.{{ .Release.Namespace
+    }}.svc.cluster.local
+  master: mymaster
+  password: admin@2020
+  resqueDb: 7
+  sentinelPort: 26379
+sidekiq:
+  affinity: {}
+  config:
+    threads: 30
+  enabled: true
+  nodeAffinityPreset:
+    key: kubernetes.io/node-type
+    type: ""
+  podAffinityPreset: ""
+  podAntiAffinityPreset: soft
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 2
+      memory: 3Gi
+    requests:
+      cpu: 300m
+      memory: 500Mi
+tolerations:
+- effect: NoSchedule
+  key: node-role.kubernetes.io/gitee-code
+  operator: Exists
+virtualService:
+  enabled: true
+  innerSourceRegexEnabled: false
